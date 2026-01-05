@@ -11,4 +11,4 @@ data_saran = [
     'Maintain Weight',
     'Build Muscle'
 ]
-riwayat = []
+data_riwayat = []
