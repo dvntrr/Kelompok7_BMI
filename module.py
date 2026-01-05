@@ -1,6 +1,11 @@
 import datetime
 from data import *
 
+def user_input() :
+    berat = int(input("\nHow much do you weigh? (kg) : "))
+    tinggi = int(input("How tall are you? (cm) : "))
+    return berat, tinggi
+
 def hitung_bmi(berat,tinggi) :
     tinggi_m = tinggi/100
     bmi = berat/(tinggi_m**2)
@@ -17,11 +22,12 @@ def tentukan_kategori(bmi) :
         return data_kategori[3], data_pesan[3]
     
 def menu() :
-    print("MAIN MENU")
+    print("\n-+-+-+-MAIN MENU-+-+-+-")
     print("1. Calculate BMI")
     print("2. View BMI History")
-    print("3. Health Guidance")
-    print("4. Exit")
+    print("3. Remove BMI History")
+    print("4. Health Guidance")
+    print("5. Exit")
     
 def tampilkan_riwayat() :
     if not data_riwayat :
@@ -41,26 +47,36 @@ def tampilkan_hasil(bmi, pesan):
     print(f"{pesan}")
 
 def tampilkan_saran(kategori):
-            print(f"\nOur Recommendations for You : ")
-            if kategori == "Underweight" :
-                print(f"{data_saran[0]}")
-                return
-            elif kategori == "Normal" :
-                print(f"{data_saran[1]}")
-                return
-            elif kategori == "Overweight" :
-                print(f"{data_saran[2]}")
-                return
-            elif kategori == "Obese" :
-                print(f"{data_saran[3]}")
-                return
+    print(f"\nOur Recommendations for You : ")
+    if kategori == "Underweight" :
+        print(f"{data_nama_saran[0]}")
+        return
+    elif kategori == "Normal" :
+        print(f"{data_nama_saran[1]}")
+        return
+    elif kategori == "Overweight" :
+        print(f"{data_nama_saran[2]}")
+        return
+    elif kategori == "Obese" :
+        print(f"{data_nama_saran[2]}")
+        return
+        
+def hapus_riwayat(data_riwayat) :
+    hapus = input("Are You sure You want to remove last data? (Y/N)").upper()
+    if hapus == 'Y' :
+        data_riwayat.pop()
+    elif hapus == 'N':
+        print("Delete canceled.")
+    else:
+        print("Invalid input. Please enter Y or N.")
+    kembali_ke_menu()
 
 def kembali_ke_menu() :
     input("\nPress ENTER to go back to menu")
     return
 
 def input_saran() :
-     data_saran
+    print("What we suggest you do : ")
 
 def buat_data(berat, tinggi, bmi, kategori):
     waktu = datetime.datetime.now().strftime("%d-%m-%Y %H:%M")

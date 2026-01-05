@@ -1,15 +1,10 @@
 from module import *
 from data import *
 
-def user_input() :
-    berat = int(input("\nHow much do you weigh? (kg) : "))
-    tinggi = int(input("How tall are you? (cm) : "))
-    return berat, tinggi
-
 def main() :
     while True :
         menu()
-        pilihan = input("\nSelect an option (1/2/3/4): ")
+        pilihan = input("\nSelect an option (1/2/3/4/5): ")
 
         if pilihan == '1' :
             berat, tinggi = user_input()
@@ -28,12 +23,19 @@ def main() :
             tampilkan_riwayat()
             kembali_ke_menu()
 
+        elif pilihan == '3' :
+            hapus_riwayat(data_riwayat)
+
         elif pilihan == '4' :
+
+            kembali_ke_menu()
+
+        elif pilihan == '5' :
             print("Goodbye!")
             break
 
         else :
-            print("Wrong Input! Please select a number 1-4")
+            print("Wrong Input! Please select a number 1-5")
 
 if __name__ == "__main__":
     main()

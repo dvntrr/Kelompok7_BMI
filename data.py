@@ -5,7 +5,7 @@ data_pesan = [
     'According to your BMI, you might be overweight.',
     'According to your BMI, you might be obese.'
 ]
-data_saran = [
+data_nama_saran = [
     'Gain Weight',
     'Maintain Weight',
     'Lose Weight',
