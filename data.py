@@ -7,8 +7,8 @@ data_pesan = [
 ]
 data_saran = [
     'Gain Weight',
-    'Lose Weight',
     'Maintain Weight',
+    'Lose Weight',
     'Build Muscle'
 ]
 data_riwayat = []
