@@ -27,15 +27,14 @@ def main() :
             hapus_riwayat(data_riwayat)
 
         elif pilihan == '4' :
-
-            kembali_ke_menu()
+            pilih_panduan()
 
         elif pilihan == '5' :
             print("Goodbye!")
             break
 
         else :
-            print("Wrong Input! Please select a number 1-5")
+            print("Invalid input. Please choose a number between 1-5")
 
 if __name__ == "__main__":
     main()
