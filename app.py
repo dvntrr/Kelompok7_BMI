@@ -9,15 +9,15 @@ def main() :
         if pilihan == '1' :
             berat, tinggi = user_input()
             bmi = hitung_bmi(berat,tinggi)
-            kategori, pesan = tentukan_kategori(bmi)
+            kategori, pesan, saran_terpilih = tentukan_kategori(bmi)
             
             tampilkan_hasil(bmi,pesan)
-            tampilkan_saran(kategori)
-            kembali_ke_menu()
+            tampilkan_saran(saran_terpilih)
 
-            riwayat = buat_data(berat, tinggi, bmi, kategori)
+            riwayat = buat_data(berat, tinggi, bmi, kategori, saran_terpilih)
             
             data_riwayat.append(riwayat)
+            kembali_ke_menu()
 
         elif pilihan == '2' :
             tampilkan_riwayat()
@@ -25,9 +25,11 @@ def main() :
 
         elif pilihan == '3' :
             hapus_riwayat(data_riwayat)
+            kembali_ke_menu()
 
         elif pilihan == '4' :
-            pilih_panduan()
+            pilih_panduan(saran_terpilih)
+            kembali_ke_menu()
 
         elif pilihan == '5' :
             print("Goodbye!")

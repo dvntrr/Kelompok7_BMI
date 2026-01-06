@@ -1,6 +1,14 @@
 import datetime
 from data import *
 
+def menu() :
+    print("\n-+-+-+-MAIN MENU-+-+-+-")
+    print("1. Calculate BMI")
+    print("2. View BMI History")
+    print("3. Remove BMI History")
+    print("4. Health Guidance")
+    print("5. Exit")
+    
 def user_input():
     while True:
         try:
@@ -23,40 +31,20 @@ def hitung_bmi(berat,tinggi) :
 
 def tentukan_kategori(bmi) :
     if bmi < 18.5 :
-        return data_kategori[0], data_pesan[0]
-    if bmi < 25 :
-        return data_kategori[1], data_pesan[1]
-    if bmi < 30 :
-        return data_kategori[2], data_pesan[2]
+        return data_kategori[0], data_pesan[0], data_saran[0]
+    elif bmi < 25 :
+        return data_kategori[1], data_pesan[1],data_saran[1]
+    elif bmi < 30 :
+        return data_kategori[2], data_pesan[2],data_saran[2]
     else :
-        return data_kategori[3], data_pesan[3]
-    
-def menu() :
-    print("\n-+-+-+-MAIN MENU-+-+-+-")
-    print("1. Calculate BMI")
-    print("2. View BMI History")
-    print("3. Remove BMI History")
-    print("4. Health Guidance")
-    print("5. Exit")
+        return data_kategori[3], data_pesan[3],data_saran[2]
 
 def tampilkan_hasil(bmi, pesan):
     print(f"\nYour BMI Score :      {bmi:.2f}")
     print(f"{pesan}")
 
-def tampilkan_saran(kategori):
-    print(f"\nOur Recommendations for You : ")
-    if kategori == "Underweight" :
-        print(f"{data_saran[0]}")
-        return
-    elif kategori == "Normal" :
-        print(f"{data_saran[1]}")
-        return
-    elif kategori == "Overweight" :
-        print(f"{data_saran[2]}")
-        return
-    elif kategori == "Obese" :
-        print(f"{data_saran[2]}")
-        return
+def tampilkan_saran(saran_terpilih):
+    print(f"\nOur Recommendations for You : {saran_terpilih}")
 
 def tampilkan_riwayat() :
     if not data_riwayat :
@@ -70,6 +58,15 @@ def tampilkan_riwayat() :
         print(f"BMI      : {data[2]:.2f}")
         print(f"Category : {data[3]}")
         print(f"Time     : {data[4]}")
+
+def tampilkan_rencana(saran_terpilih) :
+    print("\n-+-+-+-WEEKLY PLAN-+-+-+")
+    if saran_terpilih not in rencana_mingguan:
+        print("No weekly plan available.")
+        return
+
+    for plan in rencana_mingguan[saran_terpilih]:
+        print(plan)
         
 def hapus_riwayat(data_riwayat) :
     hapus = input("Are You sure You want to remove last data? (Y/N)").upper()
@@ -82,62 +79,68 @@ def hapus_riwayat(data_riwayat) :
         print("Remove history canceled")
     else:
         print("Invalid input. Please enter Y or N")
-    kembali_ke_menu()
 
-def pilih_panduan() :
+def pilih_panduan(saran_terpilih) :
     print("\n-+-+-+-HEALTH GUIDANCE-+-+-+-")
     print("1. Select Goal")
     print("2. Check Weekly Plans")
-    pilihan = input("Choose what you want to do (1/2) : ")
+    pilihan = input("\nChoose what you want to do (1/2) : ")
     if pilihan == '1' :
-        pilih_goal()
+        pilih_saran()
     elif pilihan == '2' :
-        print("Not supported yet")
+        tampilkan_rencana(saran_terpilih)
     else :
         print("Invalid input. Please enter 1 or 2")
     return
 
+def pilih_saran() :
+    while True :
+        print("\n-+-+-+-SELECT YOUR GOAL-+-+-+-")
+        print("1. Gain Weight")
+        print("2. Maintain Weight")
+        print("3. Lose Weight")
+        print("4. Build Muscle")
+        pilihan = input("Choose a new goal (1-4) : ")
 
-def pilih_goal() :
-    print("\n-+-+-+-SELECT YOUR GOAL-+-+-+-")
-    print("1. Gain Weight")
-    print("2. Maintain Weight")
-    print("3. Lose Weight")
-    print("4. Build Muscle")
-    pilihan = input("Choose a goal (1-4) : ")
+        if pilihan == '1':
+            saran_terpilih = data_saran[0]
+            tips = data_tips[0]
+            print(f"Goal has changed to {data_saran[0]}")
+        elif pilihan == '2':
+            saran_terpilih = data_saran[1]
+            tips = data_tips[1]
+            print(f"Goal has changed to {data_saran[1]}")
+        elif pilihan == '3':
+            saran_terpilih = data_saran[2]
+            tips = data_tips[2]
+            print(f"Goal has changed to {data_saran[2]}")
+        elif pilihan == '4':
+            saran_terpilih = data_saran[3]
+            tips = data_tips[3]
+            print(f"Goal has changed to {data_saran[3]}")
+        else:
+            print("Invalid input. Please choose a number between 1-4")
+            continue
+    
+        print("\nOur Suggestions : ")
+        for tip in tips :
+            print(f"- {tip}")
+    
+        konfirmasi_rencana(saran_terpilih)
+        return saran_terpilih
 
-    if pilihan == '1':
-        print("\nOur Suggestions : ")
-        for tip in data_tips[0]:
-            print("-", tip)
-        kembali_ke_menu()
-        return data_saran[0]
-    elif pilihan == '2':
-        print("\nOur Suggestions : ")
-        for tip in data_tips[1]:
-            print("-", tip)
-        kembali_ke_menu()
-        return data_saran[1]
-    elif pilihan == '3':
-        print("\nOur Suggestions : ")
-        for tip in data_tips[2]:
-            print("-", tip)
-        kembali_ke_menu()
-        return data_saran[2]
-    elif pilihan == '4':
-        print("\nOur Suggestions : ")
-        for tip in data_tips[2]:
-            print("-", tip)
-        kembali_ke_menu()
-        return data_saran[2]
-    else:
-        print("Invalid input. Please choose a number between 1-4")
-    kembali_ke_menu()
+def konfirmasi_rencana(saran_terpilih) :
+    pilihan = input(f"\nDo you want to check your weekly plan? (Y/N)").upper()
+    if pilihan == 'Y' : 
+        tampilkan_rencana(saran_terpilih)
+    elif pilihan == 'N' :
+        print("Don't worry, You can always check them later")
+
 
 def kembali_ke_menu() :
     input("\nPress ENTER to go back to menu")
     return
 
-def buat_data(berat, tinggi, bmi, kategori):
+def buat_data(berat, tinggi, bmi, kategori, saran_terpilih):
     waktu = datetime.datetime.now().strftime("%d-%m-%Y %H:%M")
-    return [berat, tinggi, bmi, kategori, waktu]
+    return [berat, tinggi, bmi, kategori, waktu, saran_terpilih]
