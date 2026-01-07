@@ -120,7 +120,7 @@ def pilih_panduan(saran_terpilih) :
             return saran_terpilih
         else :
             print("Invalid input. Please enter 1 or 2")
-            return saran_terpilih
+            continue
 
 def pilih_saran(saran_terpilih) :
     while True :
