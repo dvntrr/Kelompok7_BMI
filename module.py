@@ -22,7 +22,7 @@ def user_input():
             return berat, tinggi
 
         except ValueError:
-            print("Invalid input. Please enter numbers only.")
+            print("Invalid input. Please enter numbers only")
 
 def hitung_bmi(berat,tinggi) :
     tinggi_m = tinggi/100
@@ -81,9 +81,6 @@ def tampilkan_riwayat(data_riwayat) :
         print(f"Time     : {data[5]}")
 
 def tampilkan_rencana(saran_terpilih) :
-    if saran_terpilih not in rencana_mingguan:
-        print("No weekly plan available.")
-        return
     print("\n-+-+-+-WEEKLY PLAN-+-+-+")
     print(f"Your current Goal : {saran_terpilih}")
     for plan in rencana_mingguan[saran_terpilih]:
@@ -95,31 +92,35 @@ def tampilkan_tips(tips) :
         print(f"- {tip}")
         
 def hapus_riwayat(data_riwayat) :
-    hapus = input("Are You sure You want to remove last data? (Y/N)").upper()
-    if hapus == 'Y' :
-        if not data_riwayat :
-            print("History is empty")
-            return
-        data_riwayat.pop()
-        print("Your last data has been removed")
-    elif hapus == 'N':
-        print("Remove history canceled")
-    else:
-        print("Invalid input. Please enter Y or N")
+    while True :
+        hapus = input("Are You sure You want to remove last data? (Y/N)").upper()
+        if hapus == 'Y' :
+            if not data_riwayat :
+                print("History is empty")
+                return
+            data_riwayat.pop()
+            print("Your last data has been removed")
+            break
+        elif hapus == 'N':
+            print("Remove history canceled")
+            break
+        else:
+            print("Invalid input. Please enter Y or N")
 
 def pilih_panduan(saran_terpilih) :
-    print("\n-+-+-+-HEALTH GUIDANCE-+-+-+-")
-    print("1. Select Goal")
-    print("2. Check Weekly Plans")
-    pilihan = input("\nChoose what you want to do (1/2) : ")
-    if pilihan == '1' :
-        return pilih_saran(saran_terpilih)
-    elif pilihan == '2' :
-        tampilkan_rencana(saran_terpilih)
-        return saran_terpilih
-    else :
-        print("Invalid input. Please enter 1 or 2")
-        return saran_terpilih
+    while True :
+        print("\n-+-+-+-HEALTH GUIDANCE-+-+-+-")
+        print("1. Select Goal")
+        print("2. Check Weekly Plans")
+        pilihan = input("\nChoose what you want to do (1/2) : ")
+        if pilihan == '1' :
+            return pilih_saran(saran_terpilih)
+        elif pilihan == '2' :
+            tampilkan_rencana(saran_terpilih)
+            return saran_terpilih
+        else :
+            print("Invalid input. Please enter 1 or 2")
+            return saran_terpilih
 
 def pilih_saran(saran_terpilih) :
     while True :
@@ -129,7 +130,7 @@ def pilih_saran(saran_terpilih) :
         print("3. Lose Weight")
         print("4. Build Muscle")
         print("5. Back")
-        pilihan = input("Choose a new goal (1/2/3/4/5) : ")
+        pilihan = input("\nChoose a new goal (1/2/3/4/5) : ")
 
         if pilihan == '1':
             saran_terpilih = data_saran[0]
@@ -150,7 +151,7 @@ def pilih_saran(saran_terpilih) :
         elif pilihan == '5' :
             print("You did not changed your Goal")
             return saran_terpilih
-        
+
         else:
             print("Invalid input. Please choose a number between 1-5")
             continue
@@ -163,14 +164,16 @@ def pilih_saran(saran_terpilih) :
         return saran_terpilih
 
 def konfirmasi_rencana(saran_terpilih) :
-    pilihan = input(f"\nDo you want to check your weekly plan? (Y/N)").upper()
-    if pilihan == 'Y' : 
-        tampilkan_rencana(saran_terpilih)
-    elif pilihan == 'N' :
-        print("Don't worry, You can always check them later")
-    else :
-        print("Invalid input. Please enter Y or N")
-
+    while True :
+        pilihan = input(f"\nDo you want to check your weekly plan? (Y/N)").upper()
+        if pilihan == 'Y' : 
+            tampilkan_rencana(saran_terpilih)
+            break
+        elif pilihan == 'N' :
+            print("Don't worry, You can always check them later")
+            break
+        else :
+            print("Invalid input. Please enter Y or N")
 
 def kembali_ke_menu() :
     input("\nPress ENTER to go back to menu")
